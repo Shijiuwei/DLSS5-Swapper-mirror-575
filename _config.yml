@@ -1,0 +1,5 @@
+title: "DLSS5-Swapper-mirror-575"
+description: "High availability mirror and network topology specifications for rakanki911/DLSS5-Swapper"
+theme: jekyll-theme-cayman
+plugins:
+  - jekyll-relative-links
