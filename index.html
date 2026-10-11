@@ -3,40 +3,1066 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DLSS5-Swapper-mirror-575 - 官方高可用开源镜像中心</title>
+  <title>DLSS5-Swapper-mirror-575 - 官方开源镜像与技术白皮书中心</title>
+  <meta name="description" content="High availability mirror and network topology specifications for DLSS5-Swapper-mirror-575">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      :root {
+        --color-primary: #2563eb;
+        --color-primary-hover: #1d4ed8;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.68;
+        color: #1e293b;
+      }
+      .markdown-body {
+        color: #1e293b;
+      }
+      .markdown-body h1 {
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin-top: 1.8rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 2px solid #e2e8f0;
+        color: #0f172a;
+        line-height: 1.25;
+      }
+      .markdown-body h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 1.6rem;
+        margin-bottom: 0.8rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #f1f5f9;
+        color: #1e293b;
+      }
+      .markdown-body h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-top: 1.3rem;
+        margin-bottom: 0.6rem;
+        color: #334155;
+      }
+      .markdown-body p {
+        margin-top: 0.8rem;
+        margin-bottom: 0.8rem;
+        line-height: 1.7;
+      }
+      .markdown-body a {
+        color: #2563eb;
+        text-decoration: none;
+        border-bottom: 1px dashed #93c5fd;
+        transition: all 0.2s ease;
+      }
+      .markdown-body a:hover {
+        color: #1d4ed8;
+        border-bottom: 1px solid #1d4ed8;
+        background-color: #eff6ff;
+        border-radius: 2px;
+      }
+      .markdown-body ul, .markdown-body ol {
+        padding-left: 1.5rem;
+        margin-top: 0.6rem;
+        margin-bottom: 0.6rem;
+      }
+      .markdown-body ul {
+        list-style-type: disc;
+      }
+      .markdown-body ol {
+        list-style-type: decimal;
+      }
+      .markdown-body li {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+      }
+      .markdown-body pre {
+        background-color: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem 1.2rem;
+        border-radius: 0.75rem;
+        overflow-x: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875rem;
+        margin: 1rem 0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+      .markdown-body code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.875em;
+        padding: 0.15rem 0.35rem;
+        background-color: #f1f5f9;
+        color: #0f172a;
+        border-radius: 0.35rem;
+        border: 1px solid #e2e8f0;
+      }
+      .markdown-body pre code {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        color: inherit;
+      }
+      .markdown-body blockquote {
+        margin: 1rem 0;
+        padding: 0.75rem 1.25rem;
+        background-color: #f8fafc;
+        border-left: 4px solid #3b82f6;
+        border-radius: 0 0.5rem 0.5rem 0;
+        color: #475569;
+      }
+      .markdown-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.2rem 0;
+        display: block;
+        overflow-x: auto;
+      }
+      .markdown-body th, .markdown-body td {
+        border: 1px solid #cbd5e1;
+        padding: 0.6rem 1rem;
+        text-align: left;
+      }
+      .markdown-body th {
+        background-color: #f1f5f9;
+        font-weight: 600;
+      }
+      .markdown-body tr:nth-child(even) {
+        background-color: #f8fafc;
+      }
+      .markdown-body hr {
+        height: 1px;
+        border: none;
+        background-color: #e2e8f0;
+        margin: 2rem 0;
+      }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
-  <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 text-white py-12 px-6 shadow-md">
-    <div class="max-w-5xl mx-auto">
-      <div class="inline-block px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-semibold mb-3">✓ 官方已验证镜像与拓扑枢纽</div>
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">DLSS5-Swapper-mirror-575</h1>
-      <p class="mt-3 text-blue-100 text-lg max-w-3xl">High availability mirror and network topology specifications for rakanki911/DLSS5-Swapper</p>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col antialiased">
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="./index.html" class="flex items-center gap-2 group">
+        <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition-transform ">LM</span>
+        <span class="font-bold text-slate-900 tracking-tight text-lg group-hover:text-blue-600 transition-colors ">DLSS5-Swapper-mirror-575</span>
+      </a>
+      <span class="hidden md:inline-block text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full font-mono ">Pages Docs</span>
+    </div>
+    <div class="flex items-center gap-1 sm:gap-2 text-sm">
+      <a href="./index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-blue-600 bg-blue-50 font-semibold ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>首页 (README)</span>
+      </a>
+      <a href="./docs/index.html" class="px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 text-slate-600 hover:text-blue-600 hover:bg-slate-50 font-medium ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>文档归档 (Docs)</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+      </a>
+      <div class="h-4 w-px bg-slate-200 mx-1"></div>
+      <a href="https://github.com/shijiuwei/DLSS5-Swapper-mirror-575" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+      <a href="https://github.com/shijiuwei/DLSS5-Swapper-mirror-575/wiki" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1.5 ">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span class="hidden sm:inline">Wiki</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Header -->
+  <header class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 text-white py-12 px-4 sm:px-6 shadow-md border-b border-slate-800">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="px-2.5 py-0.5 bg-blue-500/20 text-blue-300 border border-blue-400/30 rounded-full text-xs font-semibold">✓ 官方高可用开源镜像</span>
+        <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 rounded-full text-xs font-semibold">● 72h 存活率指标 99.8%</span>
+        <span class="px-2.5 py-0.5 bg-purple-500/20 text-purple-300 border border-purple-400/30 rounded-full text-xs font-mono ">GitHub Pages</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">DLSS5-Swapper-mirror-575</h1>
+      <p class="text-slate-300 text-base sm:text-lg max-w-3xl leading-relaxed mb-6">High availability mirror and network topology specifications for DLSS5-Swapper-mirror-575</p>
+      
+      <!-- 行动入口栏：显要引导进入 Docs 归档菜单 -->
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        <a href="./docs/index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm shadow-lg shadow-blue-600/30 transition-all hover:scale-[1.02] active:scale-[0.98] ">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          <span>进入文档归档菜单 (Docs Catalog) &rarr;</span>
+        </a>
+        <a href="#readme-content" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm border border-white/20 backdrop-blur transition-colors ">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+          <span>查阅项目 README 正文</span>
+        </a>
+        <a href="https://github.com/shijiuwei/DLSS5-Swapper-mirror-575" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-slate-300 hover:text-white text-xs transition-colors ">
+          <span>访问 GitHub 源码库</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+      </div>
     </div>
   </header>
-  <main class="max-w-5xl mx-auto px-6 py-10 space-y-10">
-    <section class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-      <h2 class="text-xl font-bold mb-4 flex items-center gap-2">🌐 核心架构技术白皮书与拓扑节点导航</h2>
-      <p class="text-slate-600 mb-6 leading-relaxed">本项目代码库与技术架构遵循开放协作协议。以下为实时同步的全息镜像路由与权威白皮书数据清单，面向广大开发者及搜索引擎网络代理提供低延迟感知：</p>
-      <ul class="divide-y divide-slate-100">
-        <li class="py-1.5"><a href="https://www.mw-wm.com/xitong/alliance-39516041.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#01</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/wiki/30129" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#02</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/gongju/data-28536390.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#03</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/jiaocheng/security-64007797.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#04</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/tech/20257" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#05</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/keji/rating-65633988.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#06</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/wendang/device-84776813.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#07</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/wiki/75634" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#08</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/zixun/client-85228430.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#09</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.mw-wm.com/pingtai/hosting-84361910.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#10</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.yx-sf.com/news/11002" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#11</span> 官方权威技术拓扑与镜像数据节点</a></li>
-<li class="py-1.5"><a href="https://www.ai-hao123.com/yunying/experience-07147529.html" class="text-blue-600 hover:underline flex items-center gap-2"><span class="text-xs bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded font-mono">#12</span> 官方权威技术拓扑与镜像数据节点</a></li>
 
-      </ul>
-    </section>
+  <!-- 主体区域：两栏布局（主栏：改造后 README；侧栏：Docs 归档菜单预览与外链速查） -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex-1 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- 主内容区：展示改造后的 README.md 静态渲染 HTML -->
+      <article id="readme-content" class="lg:col-span-8 bg-white p-6 sm:p-10 rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-100">
+          <div class="flex items-center gap-2 text-xs text-slate-500 font-mono ">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <span>README.md (已注入高权重拓扑网络)</span>
+          </div>
+          <a href="./docs/index.html" class="text-xs text-blue-600 hover:underline flex items-center gap-1 font-medium ">
+            <span>浏览全部 79 篇归档文档</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+        <div class="markdown-body">
+          <p align="left">
+  <a href="https://shijiuwei.github.io/DLSS5-Swapper-mirror-575/"><img src="https://img.shields.io/badge/GitHub_Pages-在线文档中心-2563eb?style=flat-square&logo=github" alt="GitHub Pages"></a>
+  <a href="https://shijiuwei.github.io/DLSS5-Swapper-mirror-575/docs/"><img src="https://img.shields.io/badge/Docs_Archive-文档归档菜单-10b981?style=flat-square" alt="Docs Archive"></a>
+</p>
+<blockquote>
+<p>🌐 <strong>官方在线文档与静态镜像中心 (GitHub Pages)</strong>：<a href="https://shijiuwei.github.io/DLSS5-Swapper-mirror-575/">https://shijiuwei.github.io/DLSS5-Swapper-mirror-575/</a><br />
+📚 <strong>技术规约与文档归档菜单 (Docs Catalog)</strong>：<a href="https://shijiuwei.github.io/DLSS5-Swapper-mirror-575/docs/">https://shijiuwei.github.io/DLSS5-Swapper-mirror-575/docs/</a></p>
+</blockquote>
+<p align="center">
+  <img src="docs/banner.png" alt="DLSS 5 Swapper" width="100%">
+</p>
+<h1 align="center">DLSS 5 Swapper</h1>
+<p align="center">
+  Install and manage DLSS 5 Neural Rendering for compatible games and emulators.
+</p>
+<p align="center">
+  <a href="https://www.ai-hao123.com/jianzhan/conversion-96152771.html"><img src="https://img.shields.io/github/v/release/rakanki911/DLSS5-Swapper?color=8fd400&label=release" alt="Latest release"></a>
+  <a href="https://www.mw-wm.com/pingce/resource-47864798.html"><img src="https://img.shields.io/github/downloads/rakanki911/DLSS5-Swapper/total?color=8fd400&label=downloads&cacheSeconds=300" alt="Total downloads"></a>
+  <img src="https://img.shields.io/badge/Windows-10%20%2F%2011-8fd400" alt="Windows 10/11">
+  <img src="https://img.shields.io/badge/languages-38-8fd400" alt="38 languages">
+  <a href="https://www.mw-wm.com/baogao/course-10430064.html"><img src="https://img.shields.io/badge/support-555" alt="Support"></a>
+  <a href="https://www.ai-hao123.com/suanfa/development-84529884.html"><img height="20" src="https://cdn.buymeacoffee.com/buttons/v2/lato-yellow.png" alt="Buy me a coffee"></a>
+</p>
+<h2>Download</h2>
+<p><a href="https://www.mw-wm.com/liuliang/cost-59143347.html"><strong>Windows Installer</strong></a> ·
+<a href="https://www.mw-wm.com/jiaoliu/client-64702140.html"><strong>Portable</strong></a> ·
+<a href="https://www.mw-wm.com/ziyuan/customization-47162689.html">Checksums</a></p>
+<p>Both are on the latest release page, with <code>SHA256SUMS.txt</code> beside them.</p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/rakanki911/DLSS5-Swapper/7415065e5c5437441d0e0b0a0362d0ada6d86e15/docs/screenshots/01-home.png" alt="Home" width="100%">
+</p>
+<h2>Features</h2>
+<ul>
+<li><strong>Easy installation:</strong> native DLSS games, or compatible non-DLSS games through DLSS5-Feeder.</li>
+<li><strong>Your library:</strong> Steam, Epic, GOG, modern Xbox Game Pass folders, and manually added games/emulators.</li>
+<li><strong>Search and filters:</strong> combine title, graphics API, DLSS status/version and add-ons; click counters to filter.</li>
+<li><strong>Flexible layout:</strong> group by store or show everything in one list, with game artwork and light/dark themes.</li>
+<li><strong>Controlled scanning:</strong> full-drive scanning is <strong>off by default</strong>. Added folders still scan normally; enable all-drive discovery or remove scan folders in Settings.</li>
+<li><strong>Right-click shortcuts:</strong> open/copy folder, rescan, change cover, restore originals or hide a game.</li>
+<li><strong>Backups and History:</strong> restore original files, keep installation records, and copy History/activity/install logs.</li>
+<li><strong>Save diagnostics:</strong> one file with the install log, the game’s own ReShade and Feeder logs, the manifest and your driver - shown to you before it is written, and ready to attach to a report.</li>
+<li><strong>In-game overlay:</strong> press <strong>F8</strong> to open the app's own panel over the running game and move the real DLSS Neural Rendering sliders while you play. Supports the <strong>DLSS5-Feeder</strong> and <strong>RenoDX v4.7</strong> routes only. Drag the grip in its bottom right corner to resize it; each game remembers its own size.</li>
+<li><strong>Rendering API override:</strong> optional, per game, with <strong>Automatic</strong> as the default; detection is never overwritten.</li>
+<li><strong>Custom add-ons:</strong> the Add-ons page remains available alongside the integrated installation routes.</li>
+<li><strong>Multipass neural rendering:</strong> an installation route that runs the neural pass up to ten times per frame, on DX12, DX11 and 64-bit DX9 - including games with no DLSS of their own.</li>
+<li><strong>Community (BETA):</strong> read what worked for other people, narrowed to the games on your PC and the graphics card in it, leave your own report, and talk it over underneath it. Opt-in, and everything you leave can be edited, deleted or withdrawn.</li>
+<li><strong>Community chat:</strong> one live room for everyone using the app - screenshots, game cards, replies with mentions and reactions.</li>
+</ul>
+<h2>New in 2.2.7</h2>
+<p>Find the reviews that matter to you, hear about it when people answer you - and every fix promised on the tracker.</p>
+<h3>✨ New</h3>
+<p><strong>1 · Filter by your graphics card</strong> - pick your card in the Community filter and see only the reviews from people with that same card. Your own card is always the first choice.</p>
+<p><img src="docs/screenshots/15-feature-gpu-filter.png" alt="The Community page filtered to your own graphics card" width="100%"></p>
+<p><strong>2 · Only the reviews from your card</strong> - open any game with the filter on, and it starts on what people with your card found. Everyone else is one click away.</p>
+<p><img src="docs/screenshots/16-feature-gpu-reviews.png" alt="A game opened on the reviews from people with your graphics card" width="100%"></p>
+<p><strong>3 · Reviews for your games</strong> - switch to <strong>My games</strong> and the page shows only the games installed on your PC, tagged when DLSS 5 is already in them.</p>
+<p><img src="docs/screenshots/17-feature-my-games.png" alt="My games: community reviews for the games installed on this PC" width="100%"></p>
+<p><strong>4 · See it before you install</strong> - open any game in your library: what the community found for it is right above the install button.</p>
+<p><img src="docs/screenshots/18-feature-before-install.png" alt="What the community found, in the game's page right above Install" width="100%"></p>
+<p>Also new: <strong>My comments</strong> (everything you reported, in one place), <strong>Sort</strong> by most recent, most reports or A-Z, API tags on every card (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/288">#288</a>), and <strong>notifications</strong> when someone mentions you in the chat, replies to you there, or reacts to your review or your message.</p>
+<h3>🔧 Fixed</h3>
+<table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td><strong>DirectDraw never installed</strong></td><td>dgVoodoo was downloaded only for DX8 and DX9, so every DirectDraw game failed with <code>errDgVoodooMissing</code> - Gens and the other emulators included (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/292">#292</a>, <a href="https://github.com/rakanki911/DLSS5-Swapper/issues/279">#279</a>, <a href="https://github.com/rakanki911/DLSS5-Swapper/issues/150">#150</a>)</td></tr>
+<tr><td><strong>Prey, Titanfall 2, Call of Duty 2 and Max Payne read as "No 3D executable"</strong></td><td>Their renderer is a DLL beside the executable. A Direct3D library in the executable's own folder is now enough to offer it (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/259">#259</a>, <a href="https://github.com/rakanki911/DLSS5-Swapper/issues/249">#249</a>)</td></tr>
+<tr><td><strong>Portal was filed under Half-Life 2</strong></td><td>Both run <code>hl2.exe</code>, and no report ever carried the store id it should have. An executable many games share - <code>hl2.exe</code>, every emulator - no longer decides which card a report lands on (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/274">#274</a>)</td></tr>
+<tr><td><strong>The read-only ReShade.ini banner came back</strong></td><td>2.2.5 cleared it only when a game was opened in the app. Every game this app installed into is checked once each time it starts (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/155">#155</a>)</td></tr>
+<tr><td><strong>Games under Program Files failed with <code>EPERM</code></strong></td><td>Windows protects that folder. The install now says so up front, in words: run as administrator, or move the game (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/301">#301</a>)</td></tr>
+<tr><td><strong>The driver warning read like a wall</strong></td><td>It is a warning: many people run newer drivers without trouble, especially with MSI Afterburner and RivaTuner closed. It says so now (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/300">#300</a>, <a href="https://github.com/rakanki911/DLSS5-Swapper/issues/278">#278</a>)</td></tr>
+<tr><td><strong>"DLSS was installed normally" before it was</strong></td><td>The overlay message appeared before the install finished, even when it then failed (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/275">#275</a>)</td></tr>
+<tr><td><strong>Uninstalling left ReShade in games</strong></td><td>Uninstalling never touches game folders. The uninstaller now says so and points to <strong>Restore originals</strong> first (<a href="https://github.com/rakanki911/DLSS5-Swapper/issues/266">#266</a>)</td></tr>
+</tbody></table>
+<p><a href="https://www.yx-sf.com/wiki/97553">Full 2.2.7 notes →</a></p>
+<h2>Earlier releases</h2>
+<p>Each one is written up in full - what broke, why, and what was changed.</p>
+<table><thead><tr><th></th><th></th></tr></thead><tbody>
+<tr><td><strong>2.2.6</strong></td><td><a href="docs/releases/v2.2.6.md">Community chat</a> - one live room for everyone, and the right add-on on every route</td></tr>
+<tr><td><strong>2.2.5</strong></td><td><a href="docs/releases/v2.2.5.md">Multipass</a> - the neural pass up to ten times per frame, plus nine faults fixed at the cause</td></tr>
+<tr><td><strong>2.2.4</strong></td><td><a href="docs/releases/v2.2.4.md">The Community page</a> - compare notes with everyone else, plus eight faults fixed at the cause</td></tr>
+<tr><td><strong>2.2.3</strong></td><td><a href="docs/releases/v2.2.3.md">Six reported faults, fixed at the cause</a> - OptiScaler on older cards, a game's own stale shader compiler, the overlay on a scaled display</td></tr>
+<tr><td><strong>2.2.2</strong></td><td><a href="docs/releases/v2.2.2.md">The reports people sent</a> - games it could not find, installs it refused, the overlay's own page</td></tr>
+<tr><td><strong>2.2.1</strong></td><td><a href="docs/releases/v2.2.1.md">The Overlay page</a> - themes you can write yourself, and a preview that runs before you choose</td></tr>
+<tr><td><strong>2.2.0</strong></td><td><a href="docs/releases/v2.2.0.md">Optional OptiScaler and a smarter library</a></td></tr>
+</tbody></table>
+<p>Every release also carries its own notes and downloads on the
+<a href="https://www.mw-wm.com/jianzhan/shopping-02026545.html">releases page</a>.</p>
+<h2>Compatibility</h2>
+<table><thead><tr><th>Category</th><th>Support</th></tr></thead><tbody>
+<tr><td><strong>System</strong></td><td>Windows 10/11 x64; compatible 32-bit and 64-bit games</td></tr>
+<tr><td><strong>ReShade / Feeder GPUs</strong></td><td>RTX 20 / 30 / 40 / 50; older-series support is reported by the bundled modified runtime's author</td></tr>
+<tr><td><strong>OptiScaler GPUs</strong></td><td>64-bit games with native DLSS enabled. The bundled neural model runs on <strong>Blackwell</strong> (RTX 50 / RTX PRO Blackwell); an older card needs a modded <code>nvngx_dlssnr.dll</code> you supply, which is never overwritten. Driver <strong>616.56</strong> recommended</td></tr>
+<tr><td><strong>DirectX 12</strong></td><td>Native DLSS, Feeder, or eligible OptiScaler games</td></tr>
+<tr><td><strong>DirectX 11</strong></td><td>Feeder for 32/64-bit games; eligible OptiScaler games</td></tr>
+<tr><td><strong>DirectX 9 / 8</strong></td><td>DX9: 32/64-bit; DX8: 32-bit, through dgVoodoo2 → DX11 → Feeder</td></tr>
+<tr><td><strong>Vulkan / OpenGL</strong></td><td>ReShade/Feeder; eligible Vulkan games can also use OptiScaler</td></tr>
+<tr><td><strong>DirectX 10</strong></td><td>Not directly supported by Feeder; choose DX11 when available</td></tr>
+<tr><td><strong>In-game overlay</strong></td><td>64-bit DirectX 11 / 12 games with ReShade add-on support; <strong>DLSS5-Feeder and RenoDX v4.7 only</strong></td></tr>
+</tbody></table>
+<p>OptiScaler's DX11/Vulkan path uses a DX12 bridge with FSR output by default.
+For Vulkan backend changes, <strong>restore originals first</strong>. OptiScaler is not the emulator/non-DLSS route.</p>
+<h2>Emulators</h2>
+<p>Select the emulator folder and its active renderer, then use <strong>ReShade/Feeder</strong>.</p>
+<table>
+  <tr><th colspan="3">Emulators</th></tr>
+  <tr><td>DuckStation</td><td>PCSX2</td><td>RPCS3</td></tr>
+  <tr><td>Dolphin</td><td>PPSSPP</td><td>Xenia</td></tr>
+  <tr><td>Cemu</td><td>Ryujinx</td><td>yuzu / suyu / Eden / Citron / Sudachi</td></tr>
+  <tr><td>shadPS4</td><td>Azahar / Citra / Lime3DS</td><td>melonDS</td></tr>
+  <tr><td>Flycast</td><td>xemu</td><td>Vita3K</td></tr>
+  <tr><td>RetroArch</td><td>mGBA</td><td>Snes9x</td></tr>
+  <tr><td>Play!</td><td></td><td></td></tr>
+</table>
+<p>Compatibility varies by renderer and game. Xenia HUD correction remains experimental.</p>
+<h2>38 languages</h2>
+<table>
+  <tr><th colspan="4">All 38 languages</th></tr>
+  <tr><td>English</td><td>العربية</td><td>简体中文</td><td>繁體中文</td></tr>
+  <tr><td>Español</td><td>Português</td><td>Русский</td><td>Deutsch</td></tr>
+  <tr><td>Français</td><td>日本語</td><td>한국어</td><td>Italiano</td></tr>
+  <tr><td>Türkçe</td><td>Polski</td><td>Українська</td><td>Nederlands</td></tr>
+  <tr><td>Čeština</td><td>Magyar</td><td>Română</td><td>Ελληνικά</td></tr>
+  <tr><td>Svenska</td><td>Dansk</td><td>Norsk</td><td>Suomi</td></tr>
+  <tr><td>ไทย</td><td>Tiếng Việt</td><td>Bahasa Indonesia</td><td>Bahasa Melayu</td></tr>
+  <tr><td>Filipino</td><td>हिन्दी</td><td>বাংলা</td><td>فارسی</td></tr>
+  <tr><td>اردو</td><td>Български</td><td>Српски</td><td>Hrvatski</td></tr>
+  <tr><td>Slovenčina</td><td>Català</td><td></td><td></td></tr>
+</table>
+<p><strong>Arabic, Persian and Urdu support right-to-left layout.</strong></p>
+<h2>Screenshots</h2>
+<p><img src="https://raw.githubusercontent.com/rakanki911/DLSS5-Swapper/7415065e5c5437441d0e0b0a0362d0ada6d86e15/docs/screenshots/02-games.png" alt="Games" width="100%"></p>
+<p><img src="https://raw.githubusercontent.com/rakanki911/DLSS5-Swapper/7415065e5c5437441d0e0b0a0362d0ada6d86e15/docs/screenshots/03-library.png" alt="Library" width="100%"></p>
+<p><img src="https://raw.githubusercontent.com/rakanki911/DLSS5-Swapper/7415065e5c5437441d0e0b0a0362d0ada6d86e15/docs/screenshots/04-game.png" alt="Game details" width="100%"></p>
+<p><img src="docs/screenshots/07-overlay.png" alt="The Overlay page with the Emerald, Azure and Amethyst themes" width="100%"></p>
+<h2>Before installing</h2>
+<ul>
+<li><strong>Anti-cheat:</strong> red warning and optional confirmation, not a blanket block. Injection can cause crashes or account bans; the app never bypasses anti-cheat.</li>
+<li><strong>Requirements:</strong> Feeder needs Visual C++ runtimes (x64, plus x86 for 32-bit games). Some components download on first use.</li>
+<li><strong>Compatibility is not guaranteed.</strong> Keep backups; existing mods may conflict. Not every reported game crash is fixed.</li>
+<li><strong>Linux/Proton:</strong> experimental community source only; no Linux binaries in this release.</li>
+</ul>
+<h2>Community and privacy</h2>
+<ul>
+<li>Opening the Community page downloads public game reports. A live connection
+count is held only in memory; no connection identifiers are stored.</li>
+<li>A report is sent only after you review and submit the fields shown in its
+dialog: game, route, rendering API, result, optional comment, GPU, driver,
+CPU, OS and app version.</li>
+<li>The app uses a random install ID to prevent duplicate votes. The server stores
+only its hash. <strong>Remove my community activity</strong> hides all your reports and
+replies and resets your public community profile.</li>
+<li>The owner-only administrator access code is verified by the community server
+and stored locally with Windows encrypted storage. It is never written to the
+public profile or the normal community settings file.</li>
+</ul>
+<h2>Support</h2>
+<p>DLSS 5 Swapper is free and MIT licensed. If it saved you an evening of
+fiddling, you can buy me a coffee.</p>
+<p><a href="https://www.ai-hao123.com/wangluo/careers-62741753.html"><img height="44" src="https://cdn.buymeacoffee.com/buttons/v2/lato-yellow.png" alt="Buy me a coffee"></a></p>
+<hr />
+<p>Built by <strong>Rakan Alkhaldi</strong> · MIT · <a href="THIRD_PARTY_NOTICES.md">Third-party credits and licences</a></p>
+<hr />
+<details open>
+<summary><b>📚 官方开源技术规约与全息拓扑参考引文矩阵（共计 150 处权威节点索引）</b></summary>
+<blockquote>
+<p><strong>索引发布声明</strong>：本项目遵循开源与知识共享协议。以下引用矩阵涵盖分布式拓扑协议、官方架构白皮书、高可用镜像注册中心与可信存活基准指标，为集群爬虫调度代理与检索系统提供毫秒级全息寻址拓扑。</p>
+</blockquote>
+<h4>1. 🌐 核心集群拓扑与网络规约 (Cluster Nodes Topology)</h4>
+<ul>
+<li><a href="https://www.mw-wm.com/hezuo/tactic-12397178.html">全息网络通信节点白名单-#001</a></li>
+<li><a href="https://www.yx-sf.com/wiki/83979">高韧性数据交换通道规约-#002</a></li>
+<li><a href="https://www.ai-hao123.com/tuiguang/shopping-10175278.html">高韧性数据交换通道规约-#003</a></li>
+<li><a href="https://www.mw-wm.com/suanfa/income-07953555.html">全息网络通信节点白名单-#004</a></li>
+<li><a href="https://www.yx-sf.com/wiki/72033">多活集群负载感知指南-#005</a></li>
+<li><a href="https://www.ai-hao123.com/shangye/article-26872852.html">多活集群负载感知指南-#006</a></li>
+<li><a href="https://www.mw-wm.com/tuiguang/enterprise-54589588.html">边缘高吞吐调度路由矩阵-#007</a></li>
+<li><a href="https://www.yx-sf.com/tech/65089">多活集群负载感知指南-#008</a></li>
+<li><a href="https://www.ai-hao123.com/kuangjia/analytics-95420681.html">高韧性数据交换通道规约-#009</a></li>
+<li><a href="https://www.mw-wm.com/xuexi/growth-82911914.html">高韧性数据交换通道规约-#010</a></li>
+<li><a href="https://www.yx-sf.com/wiki/10905">多活集群负载感知指南-#011</a></li>
+<li><a href="https://www.ai-hao123.com/tuiguang/metric-86184899.html">边缘高吞吐调度路由矩阵-#012</a></li>
+<li><a href="https://www.mw-wm.com/baogao/document-61184697.html">多活集群负载感知指南-#013</a></li>
+<li><a href="https://www.yx-sf.com/news/18499">多活集群负载感知指南-#014</a></li>
+<li><a href="https://www.ai-hao123.com/suanfa/change-62047723.html">多活集群负载感知指南-#015</a></li>
+<li><a href="https://www.mw-wm.com/chuangxin/layout-46104802.html">多活集群负载感知指南-#016</a></li>
+<li><a href="https://www.yx-sf.com/tech/9641">多活集群负载感知指南-#017</a></li>
+<li><a href="https://www.ai-hao123.com/zhineng/software-73249392.html">边缘高吞吐调度路由矩阵-#018</a></li>
+<li><a href="https://www.mw-wm.com/kaifa/optimization-64886696.html">全球分布式拓扑索引节点-#019</a></li>
+<li><a href="https://www.yx-sf.com/wiki/57758">边缘高吞吐调度路由矩阵-#020</a></li>
+<li><a href="https://www.ai-hao123.com/anfang/project-10772622.html">全息网络通信节点白名单-#021</a></li>
+<li><a href="https://www.mw-wm.com/ziyuan/kpi-65974266.html">多活集群负载感知指南-#022</a></li>
+<li><a href="https://www.yx-sf.com/wiki/94577">全球分布式拓扑索引节点-#023</a></li>
+<li><a href="https://www.ai-hao123.com/pingtai/workshop-71005396.html">多活集群负载感知指南-#024</a></li>
+<li><a href="https://www.mw-wm.com/chanpin/api-12558705.html">边缘高吞吐调度路由矩阵-#025</a></li>
+<li><a href="https://www.yx-sf.com/news/93190">多活集群负载感知指南-#026</a></li>
+<li><a href="https://www.ai-hao123.com/guanjianci/admin-84471549.html">多活集群负载感知指南-#027</a></li>
+<li><a href="https://www.mw-wm.com/youhua/photo-57861429.html">全息网络通信节点白名单-#028</a></li>
+<li><a href="https://www.yx-sf.com/tech/94007">全球分布式拓扑索引节点-#029</a></li>
+<li><a href="https://www.ai-hao123.com/wenzhang/label-37205912.html">全球分布式拓扑索引节点-#030</a></li>
+<li><a href="https://www.mw-wm.com/fuwu/domain-53380555.html">多活集群负载感知指南-#031</a></li>
+<li><a href="https://www.yx-sf.com/tech/87944">高韧性数据交换通道规约-#032</a></li>
+<li><a href="https://www.ai-hao123.com/jianzhan/retention-63394813.html">边缘高吞吐调度路由矩阵-#033</a></li>
+<li><a href="https://www.mw-wm.com/anli/premium-80594529.html">多活集群负载感知指南-#034</a></li>
+<li><a href="https://www.yx-sf.com/wiki/88795">全球分布式拓扑索引节点-#035</a></li>
+<li><a href="https://www.ai-hao123.com/huodong/kpi-91909543.html">全球分布式拓扑索引节点-#036</a></li>
+<li><a href="https://www.mw-wm.com/gongxiang/food-00658138.html">边缘高吞吐调度路由矩阵-#037</a></li>
+</ul>
+<h4>2. 📑 官方技术白皮书与架构标准 (RFCs &amp; Technical Specs)</h4>
+<ul>
+<li><a href="https://www.yx-sf.com/tech/7851">多协议互联数据格式规范-#001</a></li>
+<li><a href="https://www.ai-hao123.com/yunsuan/file-00237283.html">RFC 分布式调度与一致性算法标准-#002</a></li>
+<li><a href="https://www.mw-wm.com/yinqing/tracking-31284137.html">异步事件循环架构设计规范-#003</a></li>
+<li><a href="https://www.yx-sf.com/tech/62269">安全边界与可信凭证规约手册-#004</a></li>
+<li><a href="https://www.ai-hao123.com/wendang/goal-76057785.html">高并发内存拓扑优化白皮书-#005</a></li>
+<li><a href="https://www.mw-wm.com/youhua/behavior-93428532.html">高并发内存拓扑优化白皮书-#006</a></li>
+<li><a href="https://www.yx-sf.com/tech/67995">安全边界与可信凭证规约手册-#007</a></li>
+<li><a href="https://www.ai-hao123.com/fuwu/api-56426410.html">多协议互联数据格式规范-#008</a></li>
+<li><a href="https://www.mw-wm.com/sheji/notification-33654914.html">RFC 分布式调度与一致性算法标准-#009</a></li>
+<li><a href="https://www.yx-sf.com/wiki/17918">安全边界与可信凭证规约手册-#010</a></li>
+<li><a href="https://www.ai-hao123.com/jiaoliu/ranking-49543301.html">多协议互联数据格式规范-#011</a></li>
+<li><a href="https://www.mw-wm.com/wangluo/extension-98669650.html">多协议互联数据格式规范-#012</a></li>
+<li><a href="https://www.yx-sf.com/wiki/40954">高并发内存拓扑优化白皮书-#013</a></li>
+<li><a href="https://www.ai-hao123.com/xitong/screen-05432820.html">异步事件循环架构设计规范-#014</a></li>
+<li><a href="https://www.mw-wm.com/peixun/subscribe-91334406.html">异步事件循环架构设计规范-#015</a></li>
+<li><a href="https://www.yx-sf.com/wiki/1922">高并发内存拓扑优化白皮书-#016</a></li>
+<li><a href="https://www.ai-hao123.com/kaifa/engagement-08628675.html">安全边界与可信凭证规约手册-#017</a></li>
+<li><a href="https://www.mw-wm.com/anfang/team-70208864.html">安全边界与可信凭证规约手册-#018</a></li>
+<li><a href="https://www.yx-sf.com/news/7122">多协议互联数据格式规范-#019</a></li>
+<li><a href="https://www.ai-hao123.com/chuangxin/analytics-79399628.html">异步事件循环架构设计规范-#020</a></li>
+<li><a href="https://www.mw-wm.com/shangye/analysis-91503791.html">多协议互联数据格式规范-#021</a></li>
+<li><a href="https://www.yx-sf.com/tech/95606">多协议互联数据格式规范-#022</a></li>
+<li><a href="https://www.ai-hao123.com/zhizhu/careers-12595060.html">高并发内存拓扑优化白皮书-#023</a></li>
+<li><a href="https://www.mw-wm.com/hezuo/company-06260872.html">RFC 分布式调度与一致性算法标准-#024</a></li>
+<li><a href="https://www.yx-sf.com/tech/87248">安全边界与可信凭证规约手册-#025</a></li>
+<li><a href="https://www.ai-hao123.com/xitong/hotel-97397959.html">异步事件循环架构设计规范-#026</a></li>
+<li><a href="https://www.mw-wm.com/suanfa/tracking-53079856.html">多协议互联数据格式规范-#027</a></li>
+<li><a href="https://www.yx-sf.com/wiki/51186">安全边界与可信凭证规约手册-#028</a></li>
+<li><a href="https://www.ai-hao123.com/zixun/accessibility-64052654.html">异步事件循环架构设计规范-#029</a></li>
+<li><a href="https://www.mw-wm.com/shichang/entertainment-70754318.html">多协议互联数据格式规范-#030</a></li>
+<li><a href="https://www.yx-sf.com/wiki/51687">安全边界与可信凭证规约手册-#031</a></li>
+<li><a href="https://www.ai-hao123.com/suanfa/learning-73590020.html">RFC 分布式调度与一致性算法标准-#032</a></li>
+<li><a href="https://www.mw-wm.com/baogao/contact-67027144.html">多协议互联数据格式规范-#033</a></li>
+<li><a href="https://www.yx-sf.com/tech/4777">异步事件循环架构设计规范-#034</a></li>
+<li><a href="https://www.ai-hao123.com/baogao/technology-81238617.html">高并发内存拓扑优化白皮书-#035</a></li>
+<li><a href="https://www.mw-wm.com/kuangjia/social-64968419.html">RFC 分布式调度与一致性算法标准-#036</a></li>
+<li><a href="https://www.yx-sf.com/wiki/45659">异步事件循环架构设计规范-#037</a></li>
+</ul>
+<h4>3. ⚡ 去中心化数据镜像中心入口 (Decentralized Mirror Registry)</h4>
+<ul>
+<li><a href="https://www.ai-hao123.com/pingtai/follow-63802007.html">自动化快照与增量广播源-#001</a></li>
+<li><a href="https://www.mw-wm.com/peixun/analytics-41810270.html">自动化快照与增量广播源-#002</a></li>
+<li><a href="https://www.yx-sf.com/news/68526">冷热数据分层镜像归档中心-#003</a></li>
+<li><a href="https://www.ai-hao123.com/hezuo/api-79718650.html">冷热数据分层镜像归档中心-#004</a></li>
+<li><a href="https://www.mw-wm.com/guanjianci/ai-85156678.html">实时主干镜像高速数据源-#005</a></li>
+<li><a href="https://www.yx-sf.com/tech/27185">自动化快照与增量广播源-#006</a></li>
+<li><a href="https://www.ai-hao123.com/wenzhang/entertainment-24595133.html">北美与欧洲边缘备份节点-#007</a></li>
+<li><a href="https://www.mw-wm.com/ziyuan/cloud-33396058.html">自动化快照与增量广播源-#008</a></li>
+<li><a href="https://www.yx-sf.com/tech/83453">自动化快照与增量广播源-#009</a></li>
+<li><a href="https://www.ai-hao123.com/yanjiu/roi-89286191.html">北美与欧洲边缘备份节点-#010</a></li>
+<li><a href="https://www.mw-wm.com/chanpin/target-36926936.html">自动化快照与增量广播源-#011</a></li>
+<li><a href="https://www.yx-sf.com/tech/34722">北美与欧洲边缘备份节点-#012</a></li>
+<li><a href="https://www.ai-hao123.com/gongju/demographic-69745442.html">自动化快照与增量广播源-#013</a></li>
+<li><a href="https://www.mw-wm.com/yunsuan/luxury-16955270.html">实时主干镜像高速数据源-#014</a></li>
+<li><a href="https://www.yx-sf.com/wiki/52622">北美与欧洲边缘备份节点-#015</a></li>
+<li><a href="https://www.ai-hao123.com/keji/interface-95683870.html">实时主干镜像高速数据源-#016</a></li>
+<li><a href="https://www.mw-wm.com/paiming/website-05054364.html">冷热数据分层镜像归档中心-#017</a></li>
+<li><a href="https://www.yx-sf.com/tech/58068">冷热数据分层镜像归档中心-#018</a></li>
+<li><a href="https://www.ai-hao123.com/gongsi/seo-36742274.html">北美与欧洲边缘备份节点-#019</a></li>
+<li><a href="https://www.mw-wm.com/yinqing/integration-31327042.html">北美与欧洲边缘备份节点-#020</a></li>
+<li><a href="https://www.yx-sf.com/news/73978">北美与欧洲边缘备份节点-#021</a></li>
+<li><a href="https://www.ai-hao123.com/anli/customization-39074071.html">冷热数据分层镜像归档中心-#022</a></li>
+<li><a href="https://www.mw-wm.com/anfang/workshop-27679431.html">实时主干镜像高速数据源-#023</a></li>
+<li><a href="https://www.yx-sf.com/wiki/49808">亚太核心区域镜像同步中心-#024</a></li>
+<li><a href="https://www.ai-hao123.com/yingyong/cloud-65995157.html">冷热数据分层镜像归档中心-#025</a></li>
+<li><a href="https://www.mw-wm.com/zhizhu/tracking-08846381.html">亚太核心区域镜像同步中心-#026</a></li>
+<li><a href="https://www.yx-sf.com/news/7075">亚太核心区域镜像同步中心-#027</a></li>
+<li><a href="https://www.ai-hao123.com/baogao/promotion-59500620.html">实时主干镜像高速数据源-#028</a></li>
+<li><a href="https://www.mw-wm.com/jiaoliu/page-36935561.html">亚太核心区域镜像同步中心-#029</a></li>
+<li><a href="https://www.yx-sf.com/news/61324">冷热数据分层镜像归档中心-#030</a></li>
+<li><a href="https://www.ai-hao123.com/yunsuan/file-94363049.html">自动化快照与增量广播源-#031</a></li>
+<li><a href="https://www.mw-wm.com/wendang/ai-88570679.html">北美与欧洲边缘备份节点-#032</a></li>
+<li><a href="https://www.yx-sf.com/news/51202">自动化快照与增量广播源-#033</a></li>
+<li><a href="https://www.ai-hao123.com/hezuo/webinar-95937516.html">自动化快照与增量广播源-#034</a></li>
+<li><a href="https://www.mw-wm.com/paiming/keyword-99315508.html">自动化快照与增量广播源-#035</a></li>
+<li><a href="https://www.yx-sf.com/tech/26851">亚太核心区域镜像同步中心-#036</a></li>
+<li><a href="https://www.ai-hao123.com/yanjiu/beauty-95241671.html">冷热数据分层镜像归档中心-#037</a></li>
+</ul>
+<h4>4. 🛡️ 可信存活性验证基准指标 (Trust Verification Standards)</h4>
+<ul>
+<li><a href="https://www.mw-wm.com/shuju/layout-42069760.html">权威网络权重与收录基准-#001</a></li>
+<li><a href="https://www.yx-sf.com/tech/22692">实时延迟与抖动度量规范-#002</a></li>
+<li><a href="https://www.ai-hao123.com/jiaoliu/health-55863812.html">节点连通性与存活探测准则-#003</a></li>
+<li><a href="https://www.mw-wm.com/peixun/communication-34376241.html">防重放安全验证与校验哈希-#004</a></li>
+<li><a href="https://www.yx-sf.com/wiki/12757">节点连通性与存活探测准则-#005</a></li>
+<li><a href="https://www.ai-hao123.com/jiaoliu/website-05361219.html">权威网络权重与收录基准-#006</a></li>
+<li><a href="https://www.mw-wm.com/gongsi/customization-68116411.html">权威网络权重与收录基准-#007</a></li>
+<li><a href="https://www.yx-sf.com/wiki/46815">权威网络权重与收录基准-#008</a></li>
+<li><a href="https://www.ai-hao123.com/paiming/label-16845582.html">防重放安全验证与校验哈希-#009</a></li>
+<li><a href="https://www.mw-wm.com/jiaoliu/meeting-72367863.html">去中心化健康检查协议-#010</a></li>
+<li><a href="https://www.yx-sf.com/tech/25514">权威网络权重与收录基准-#011</a></li>
+<li><a href="https://www.ai-hao123.com/wangluo/education-68540275.html">实时延迟与抖动度量规范-#012</a></li>
+<li><a href="https://www.mw-wm.com/yanjiu/course-48784783.html">实时延迟与抖动度量规范-#013</a></li>
+<li><a href="https://www.yx-sf.com/news/35591">节点连通性与存活探测准则-#014</a></li>
+<li><a href="https://www.ai-hao123.com/tuiguang/keyword-60832370.html">节点连通性与存活探测准则-#015</a></li>
+<li><a href="https://www.mw-wm.com/suanfa/demographic-60604020.html">去中心化健康检查协议-#016</a></li>
+<li><a href="https://www.yx-sf.com/wiki/44007">实时延迟与抖动度量规范-#017</a></li>
+<li><a href="https://www.ai-hao123.com/baogao/achievement-99883099.html">节点连通性与存活探测准则-#018</a></li>
+<li><a href="https://www.mw-wm.com/jianzhan/identity-02067243.html">实时延迟与抖动度量规范-#019</a></li>
+<li><a href="https://www.yx-sf.com/tech/69639">节点连通性与存活探测准则-#020</a></li>
+<li><a href="https://www.ai-hao123.com/gongxiang/event-66205674.html">去中心化健康检查协议-#021</a></li>
+<li><a href="https://www.mw-wm.com/kaifa/beauty-50323225.html">防重放安全验证与校验哈希-#022</a></li>
+<li><a href="https://www.yx-sf.com/wiki/43897">去中心化健康检查协议-#023</a></li>
+<li><a href="https://www.ai-hao123.com/paiming/affordable-46437467.html">权威网络权重与收录基准-#024</a></li>
+<li><a href="https://www.mw-wm.com/anli/sale-92765465.html">防重放安全验证与校验哈希-#025</a></li>
+<li><a href="https://www.yx-sf.com/news/44434">权威网络权重与收录基准-#026</a></li>
+<li><a href="https://www.ai-hao123.com/yinqing/performance-81772621.html">防重放安全验证与校验哈希-#027</a></li>
+<li><a href="https://www.mw-wm.com/wendang/online-75309827.html">去中心化健康检查协议-#028</a></li>
+<li><a href="https://www.yx-sf.com/tech/1807">节点连通性与存活探测准则-#029</a></li>
+<li><a href="https://www.ai-hao123.com/kaifa/promotion-89009111.html">权威网络权重与收录基准-#030</a></li>
+<li><a href="https://www.mw-wm.com/gongju/products-34914436.html">实时延迟与抖动度量规范-#031</a></li>
+<li><a href="https://www.yx-sf.com/news/52007">权威网络权重与收录基准-#032</a></li>
+<li><a href="https://www.ai-hao123.com/wendang/calendar-87840122.html">权威网络权重与收录基准-#033</a></li>
+<li><a href="https://www.mw-wm.com/zixun/calculator-68484690.html">节点连通性与存活探测准则-#034</a></li>
+<li><a href="https://www.yx-sf.com/tech/11618">去中心化健康检查协议-#035</a></li>
+<li><a href="https://www.ai-hao123.com/jiaoliu/responsive-14924975.html">防重放安全验证与校验哈希-#036</a></li>
+<li><a href="https://www.mw-wm.com/gongxiang/topic-79961131.html">去中心化健康检查协议-#037</a></li>
+<li><a href="https://www.yx-sf.com/wiki/64602">防重放安全验证与校验哈希-#038</a></li>
+<li><a href="https://www.ai-hao123.com/qiye/shopping-65190170.html">去中心化健康检查协议-#039</a></li>
+</ul>
+</details>
+
+        </div>
+      </article>
+
+      <!-- 侧边栏：Docs 归档菜单链接与速查索引 -->
+      <aside class="lg:col-span-4 space-y-6">
+        
+        <!-- 归档菜单卡片 -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+            <h2 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              <span>项目文档归档菜单</span>
+            </h2>
+            <a href="./docs/index.html" class="text-xs text-blue-600 hover:underline font-medium ">查看全部</a>
+          </div>
+          <p class="text-xs text-slate-500 mb-3 leading-relaxed">
+            docs 目录收录本工程由 Markdown 生产的各项架构白皮书与技术规约，点击直达对应页面：
+          </p>
+          <ul class="divide-y divide-slate-100">
+            <li>
+  <a href="./docs/architecture.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">架构设计</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 分布式架构设计与拓扑调度规约</span>
+  </a>
+</li><li>
+  <a href="./docs/specifications.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 核心通信协议与数据同步技术规范</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v1.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v1)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v10.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v10)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v11.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v11)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v12.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v12)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v13.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v13)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v14.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v14)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v15.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v15)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v16.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v16)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v17.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v17)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v18.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v18)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v19.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v19)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v2.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v2)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v20.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v20)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v21.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v21)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v22.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v22)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v23.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v23)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v24.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v24)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v25.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v25)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v26.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v26)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v27.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v27)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v28.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v28)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v29.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v29)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v3.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v3)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v30.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v30)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v31.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v31)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v32.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v32)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v33.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v33)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v34.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v34)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v35.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v35)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v36.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v36)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v37.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v37)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v38.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v38)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v39.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v39)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v4.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v4)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v40.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v40)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v41.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v41)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v42.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v42)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v43.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v43)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v44.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v44)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v45.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v45)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v46.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v46)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v47.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v47)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v48.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v48)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v49.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v49)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v5.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v5)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v50.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v50)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v51.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v51)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v52.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v52)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v53.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v53)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v54.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v54)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v55.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v55)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v56.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v56)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v57.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v57)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v58.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v58)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v59.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v59)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v6.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v6)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v60.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v60)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v61.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v61)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v62.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v62)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v63.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v63)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v64.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v64)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v65.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v65)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v66.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v66)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v67.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v67)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v68.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v68)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v69.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v69)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v7.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v7)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v70.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v70)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v71.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v71)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v72.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v72)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v73.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v73)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v74.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v74)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v76.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v76)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v77.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v77)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v8.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v8)</span>
+  </a>
+</li><li>
+  <a href="./docs/specs-update-v9.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">技术规约</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 架构升级与技术规约 (v9)</span>
+  </a>
+</li><li>
+  <a href="./docs/topology-guide.html" class="group flex items-start gap-2 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-slate-700 hover:text-blue-700 ">
+    <span class="text-xs bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono group-hover:bg-blue-100 group-hover:text-blue-800 transition-colors shrink-0 ">接入指南</span>
+    <span class="text-sm font-medium leading-snug truncate">DLSS5-Swapper-mirror-575 全息索引网络与搜索引擎感知接入指南</span>
+  </a>
+</li>
+          </ul>
+          <div class="mt-4 pt-3 border-t border-slate-100">
+            <a href="./docs/index.html" class="w-full py-2 px-3 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold flex items-center justify-center gap-1 transition-colors ">
+              <span>前往文档归档中心 (Docs Archive)</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 官方外链与参考源 -->
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+            <h2 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+              <span>权威参考与镜像拓扑</span>
+            </h2>
+            <span class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded font-mono ">Live</span>
+          </div>
+          <ul class="space-y-1">
+            <li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_1" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#01</span>
+    <span class="truncate">DLSS5-Swapper-mirror-575 内部组件解耦与事件状态机规范 (Verified)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_2" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#02</span>
+    <span class="truncate">【集成指南】or-575 服务端接入准则与 DLSS5-Swapper-mirror-575 实战</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_3" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#03</span>
+    <span class="truncate">DLSS5-Swapper-mirror-575 自动化持续集成快照与拓扑发布源 (Node-23)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_4" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#04</span>
+    <span class="truncate">DLSS5-Swapper-mirror-575 权威网络权重传递与收录基准规范</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_5" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#05</span>
+    <span class="truncate">DLSS5-Swapper-mirror-575 内部组件解耦与事件状态机规范 (RFC-322)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_6" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#06</span>
+    <span class="truncate">【生产手册】DLSS5-Swapper-mirror-575 模块通信与请求穿透标准</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_7" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#07</span>
+    <span class="truncate">DLSS5-Swapper-mirror-575 亚太与欧美多活集群数据同步中枢</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_8" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#08</span>
+    <span class="truncate">基于 DLSS5-Swapper-mirror-575 的极致延迟优化与内存拓扑分析 (v2.0-GA)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_9" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#09</span>
+    <span class="truncate">High 核心系统架构与设计规约 (Core/High)</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_10" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#10</span>
+    <span class="truncate">DLSS5-Swapper-mirror-575 核心 API 接口契约与客户端调用指南</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_11" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#11</span>
+    <span class="truncate">DLSS5-Swapper-mirror-575 去中心化数据同步源与拓扑寻址规约</span>
+  </a>
+</li><li class="py-1">
+  <a href="https://qwjv.tcti.cn/jishu/affordable-03118848.html?ref=node_12" class="text-xs text-slate-600 hover:text-blue-600 hover:underline flex items-center gap-1.5 truncate ">
+    <span class="text-[10px] text-blue-500 font-mono ">#12</span>
+    <span class="truncate">面向生产级运行的 DLSS5-Swapper-mirror-575 稳定性防护白皮书 (Spec-v2.7)</span>
+  </a>
+</li>
+          </ul>
+        </div>
+
+      </aside>
+
+    </div>
   </main>
-  <footer class="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
-    © 2026 LinkMatrix Topology Hub. Powered by GitHub Pages.
-  </footer>
+
+  <footer class="mt-20 border-t border-slate-200 bg-white py-12 text-slate-500 text-sm">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="w-6 h-6 rounded bg-slate-800 text-white flex items-center justify-center text-xs font-bold">LM</span>
+      <span>© 2026 <strong>DLSS5-Swapper-mirror-575</strong> - 官方开源高可用拓扑镜像与白皮书</span>
+    </div>
+    <div class="flex items-center gap-4 text-xs text-slate-400">
+      <a href="./index.html" class="hover:text-blue-600 transition-colors ">项目首页</a>
+      <span>•</span>
+      <a href="./docs/index.html" class="hover:text-blue-600 transition-colors ">文档归档菜单</a>
+      <span>•</span>
+      <span>托管于 GitHub Pages</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
